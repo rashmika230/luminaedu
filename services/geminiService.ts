@@ -2,7 +2,9 @@
 import { GoogleGenAI } from "@google/genai";
 
 const getAIClient = () => {
-  return new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Safe check for browser environments where process is not defined
+  const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
+  return new GoogleGenAI({ apiKey: apiKey || '' });
 };
 
 export const askStudyAssistant = async (question: string) => {

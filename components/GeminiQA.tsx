@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { askStudyAssistant } from '../services/geminiService';
+import { askStudyAssistant } from '../services/geminiService.ts';
 
 const GeminiQA: React.FC = () => {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant', content: string }[]>([]);
@@ -47,8 +47,8 @@ const GeminiQA: React.FC = () => {
             <h3 className="text-lg font-bold text-slate-700">How can I help you today?</h3>
             <p className="text-sm text-slate-400 mt-2">I can help with complex math, physics formulas, coding challenges, or historical analysis.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-2">
-              <button onClick={() => setInput("Explain Quantum Entanglement simply.")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Explain Quantum Physics</button>
-              <button onClick={() => setInput("How do I calculate the area of a circle?")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Math Formula Help</button>
+              <button type="button" onClick={() => setInput("Explain Quantum Entanglement simply.")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Explain Quantum Physics</button>
+              <button type="button" onClick={() => setInput("How do I calculate the area of a circle?")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Math Formula Help</button>
             </div>
           </div>
         )}
