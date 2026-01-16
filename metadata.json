@@ -1,0 +1,8 @@
+{
+  "name": "Lumina Education",
+  "description": "Advanced Learning Management System for modern students, featuring AI-assisted learning and integrated course management.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
