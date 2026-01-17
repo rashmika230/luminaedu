@@ -1,6 +1,8 @@
 
 export type UserRole = 'STUDENT' | 'TEACHER' | 'ADMIN';
 
+export type CourseStream = 'Physical Science' | 'Biological Science' | 'Commerce' | 'Arts' | 'Technology' | 'Professional';
+
 export interface User {
   id: string;
   name: string;
@@ -10,7 +12,7 @@ export interface User {
   email?: string;
   status?: 'active' | 'suspended';
   joinedDate?: string;
-  isAnnualPaid?: boolean; // For Teachers
+  isAnnualPaid?: boolean;
 }
 
 export interface Lesson {
@@ -48,12 +50,12 @@ export interface Course {
   progress: number;
   nextSession: string;
   description?: string;
-  category?: string;
+  category?: CourseStream;
   status?: 'published' | 'draft' | 'archived';
   enrolledCount?: number;
   modules?: Module[];
-  price?: number; // 0 for free
-  isPurchased?: boolean; // Local state for student view
+  price?: number; 
+  isPurchased?: boolean;
 }
 
 export interface Notice {
@@ -61,7 +63,8 @@ export interface Notice {
   title: string;
   content: string;
   date: string;
-  type: 'alert' | 'info';
+  type: 'alert' | 'info' | 'class';
+  priority?: 'high' | 'normal';
 }
 
 export interface Exam {

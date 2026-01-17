@@ -18,7 +18,8 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ user }) => {
       image: 'https://images.unsplash.com/photo-1509228468518-180dd48a5d5f?auto=format&fit=crop&q=80&w=400',
       progress: 100, // For teacher, this could mean syllabus coverage
       nextSession: 'Today, 04:00 PM',
-      category: 'Mathematics'
+      // Fixed: 'Mathematics' is not assignable to CourseStream
+      category: 'Physical Science'
     },
     {
       id: 'c2',
@@ -27,7 +28,8 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ user }) => {
       image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400',
       progress: 45,
       nextSession: 'Wednesday, 10:00 AM',
-      category: 'Computer Science'
+      // Fixed: 'Computer Science' is not assignable to CourseStream
+      category: 'Technology'
     }
   ];
 
