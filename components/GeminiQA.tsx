@@ -12,11 +12,10 @@ const GeminiQA: React.FC = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const handleAsk = async (text: string) => {
+    if (!text.trim() || isLoading) return;
 
-    const userMessage = input.trim();
+    const userMessage = text.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
@@ -24,6 +23,16 @@ const GeminiQA: React.FC = () => {
     const response = await askStudyAssistant(userMessage);
     setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     setIsLoading(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleAsk(input);
+  };
+
+  const handleSuggestion = (suggestion: string) => {
+    setInput(suggestion);
+    handleAsk(suggestion);
   };
 
   return (
@@ -34,21 +43,33 @@ const GeminiQA: React.FC = () => {
         </div>
         <div>
           <h2 className="text-xl font-bold text-slate-800">Lumina AI Tutor</h2>
-          <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">Powered by Advanced Intelligence</p>
+          <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">Advanced Institutional Intelligence</p>
         </div>
       </div>
 
-      <div className="flex-1 bg-white border-x border-slate-200 overflow-y-auto p-6 space-y-6">
+      <div className="flex-1 bg-white border-x border-slate-200 overflow-y-auto p-6 space-y-6 custom-scrollbar">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center max-w-sm mx-auto">
             <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mb-6 text-indigo-400">
               <i className="fa-solid fa-comments text-4xl opacity-50"></i>
             </div>
-            <h3 className="text-lg font-bold text-slate-700">How can I help you today?</h3>
-            <p className="text-sm text-slate-400 mt-2">I can help with complex math, physics formulas, coding challenges, or historical analysis.</p>
+            <h3 className="text-lg font-bold text-slate-700">Academic Research Hub</h3>
+            <p className="text-sm text-slate-400 mt-2">I can assist with complex derivation, coding challenges, or syllabus analysis.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-2">
-              <button type="button" onClick={() => setInput("Explain Quantum Entanglement simply.")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Explain Quantum Physics</button>
-              <button type="button" onClick={() => setInput("How do I calculate the area of a circle?")} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:border-indigo-200 transition-all">Math Formula Help</button>
+              <button 
+                type="button" 
+                onClick={() => handleSuggestion("Explain the second law of thermodynamics.")} 
+                className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-[10px] font-black text-slate-600 uppercase tracking-widest hover:border-indigo-200 hover:bg-indigo-50 transition-all"
+              >
+                Physics Help
+              </button>
+              <button 
+                type="button" 
+                onClick={() => handleSuggestion("How do I derive the quadratic formula?")} 
+                className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-[10px] font-black text-slate-600 uppercase tracking-widest hover:border-indigo-200 hover:bg-indigo-50 transition-all"
+              >
+                Math Derivation
+              </button>
             </div>
           </div>
         )}
@@ -82,7 +103,7 @@ const GeminiQA: React.FC = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your question here..."
+          placeholder="Ask your academic query..."
           className="flex-1 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all"
         />
         <button
